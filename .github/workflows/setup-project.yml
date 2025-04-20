@@ -3,6 +3,9 @@ name: Setup Project
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   setup:
     runs-on: ubuntu-latest
@@ -18,10 +21,11 @@ jobs:
       - name: Run setup script
         run: node scripts/setup.js
 
-      - name: Commit changes
+      - name: Push updated files
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "chore: initialize project metadata from setup script" || echo "No changes to commit"
-          git push
+            git config user.name "ShadowBot"
+            git config user.email "bot@shadowdev.local"
+            git remote set-url origin https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }}
+            git add .
+            git commit -m "chore: initialize project metadata from setup script" || echo "No changes"
+            git push
