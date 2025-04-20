@@ -8,6 +8,7 @@
     "dev": "ts-node src/index.ts",
     "build": "tsc",
     "lint": "eslint . --ext .ts",
+    "type-check": "tsc --noEmit",
     "setup": "node scripts/setup.js",
     "test": "jest"
   },
